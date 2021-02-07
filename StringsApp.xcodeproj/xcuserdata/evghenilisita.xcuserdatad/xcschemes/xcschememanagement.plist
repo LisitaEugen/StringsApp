@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>SharingIsCaring.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>StringsApp.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>DE443D6A25D08F2B001B4318</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE443D7B25D08F2E001B4318</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE443D8625D08F2E001B4318</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE443D9F25D0933C001B4318</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
