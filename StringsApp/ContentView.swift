@@ -8,23 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selection: Int = 0 {
-        didSet {
-        }
-    }
+    
     @EnvironmentObject var viewModel: SuffixesViewModel
     
     var body: some View {
         VStack {
-            Picker(selection: $selection, label:
+            Picker(selection: $viewModel.selectedCriteria, label:
                     Text("Picker Name")
                    , content: {
-                    Text("Value 1").tag(0)
-                    Text("Value 2").tag(1)
-                    Text("Value 3").tag(2)
+                    Text("Value 1").tag(SortingCriteria.default)
+                    Text("Value 2").tag(SortingCriteria.top10_3chars)
+                    Text("Value 3").tag(SortingCriteria.top10_5chars)
                    })
                 .pickerStyle(SegmentedPickerStyle())
-            Text(String(selection))
             ScrollView {
                 ForEach(viewModel.suffixes, id: \.self) { suffix in
                     Text(suffix)

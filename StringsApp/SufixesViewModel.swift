@@ -9,7 +9,11 @@ import Foundation
 import Combine
 
 enum SortingCriteria: Int {
-    case all, top103chars, top105chars
+    case `default`, top10_3chars, top10_5chars
+    
+    static func all() -> [SortingCriteria] {
+       return [`default`, top10_3chars, top10_5chars]
+    }
 }
 
 /*
@@ -21,6 +25,13 @@ enum SortingCriteria: Int {
 final class SuffixesViewModel: ObservableObject {
     
     @Published var suffixes: [String] = []
+    @Published var sortingCriterias: [SortingCriteria] = SortingCriteria.all()
+    @Published var sortedSuffixes: [String: Int?] = [:]
+    @Published var selectedCriteria: SortingCriteria = .default {
+        didSet {
+            applySortingCriteria(oldValue)
+        }
+    }
     
     init(text: String?) {
         guard let text = text else {
@@ -34,6 +45,18 @@ final class SuffixesViewModel: ObservableObject {
             sArray.forEach { suffix in
                 suffixes.append(suffix)
             }
+        }
+    }
+    
+    private func applySortingCriteria(_ sortingCriteria: SortingCriteria) {
+        print("Criteria changed \(sortingCriteria)")
+        switch sortingCriteria {
+        case .default:
+            return
+        case .top10_3chars:
+            return
+        case .top10_5chars:
+            return
         }
     }
 }
