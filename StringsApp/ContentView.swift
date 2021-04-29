@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("shared_text", store: UserDefaults(suiteName: "group.com.fox.StringsApp")) var sharedData: String = "My Data"
+    
     var body: some View {
-        Text("Hello, world!")
+        Text(sharedData)
             .padding()
     }
 }

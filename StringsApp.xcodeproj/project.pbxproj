@@ -16,6 +16,8 @@
 		DE443DA325D0933C001B4318 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE443DA225D0933C001B4318 /* ShareViewController.swift */; };
 		DE443DA625D0933C001B4318 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE443DA425D0933C001B4318 /* MainInterface.storyboard */; };
 		DE443DAA25D0933C001B4318 /* SharingIsCaring.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DE443DA025D0933C001B4318 /* SharingIsCaring.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EAB876CE2618933100C85159 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE443DA425D0933C001B4318 /* MainInterface.storyboard */; };
+		EAB876D426189B2200C85159 /* SuffixSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB876D326189B2200C85159 /* SuffixSequence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,7 @@
 		DE443DA725D0933C001B4318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE443DB325D093E6001B4318 /* StringsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StringsApp.entitlements; sourceTree = "<group>"; };
 		DE443DB825D0945F001B4318 /* SharingIsCaring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SharingIsCaring.entitlements; sourceTree = "<group>"; };
+		EAB876D326189B2200C85159 /* SuffixSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuffixSequence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,7 @@
 				DE443DB325D093E6001B4318 /* StringsApp.entitlements */,
 				DE443D6E25D08F2B001B4318 /* StringsAppApp.swift */,
 				DE443D7025D08F2B001B4318 /* ContentView.swift */,
+				EAB876D326189B2200C85159 /* SuffixSequence.swift */,
 				DE443D7225D08F2D001B4318 /* Assets.xcassets */,
 				DE443D7725D08F2D001B4318 /* Info.plist */,
 				DE443D7425D08F2D001B4318 /* Preview Content */,
@@ -308,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE443D7625D08F2D001B4318 /* Preview Assets.xcassets in Resources */,
+				EAB876CE2618933100C85159 /* MainInterface.storyboard in Resources */,
 				DE443D7325D08F2D001B4318 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE443D7125D08F2B001B4318 /* ContentView.swift in Sources */,
+				EAB876D426189B2200C85159 /* SuffixSequence.swift in Sources */,
 				DE443D6F25D08F2B001B4318 /* StringsAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
