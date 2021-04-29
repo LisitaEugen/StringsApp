@@ -8,16 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("shared_text", store: UserDefaults(suiteName: "group.com.fox.StringsApp")) var sharedData: String = "My Data"
+    @State var selection: Int = 0 {
+        didSet {
+        }
+    }
+    @EnvironmentObject var viewModel: SuffixesViewModel
     
     var body: some View {
-        Text(sharedData)
-            .padding()
+        VStack {
+            Picker(selection: $selection, label:
+                    Text("Picker Name")
+                   , content: {
+                    Text("Value 1").tag(0)
+                    Text("Value 2").tag(1)
+                    Text("Value 3").tag(2)
+                   })
+                .pickerStyle(SegmentedPickerStyle())
+            Text(String(selection))
+            ScrollView {
+                ForEach(viewModel.suffixes, id: \.self) { suffix in
+                    Text(suffix)
+                        .frame(width: 300, height: 20, alignment: .leading)
+                }
+            }
+            .frame(width: .infinity)
+            Spacer()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(SuffixesViewModel(text: "a dasdad asd dasd asda asd dasd asd asd asd"))
     }
 }
