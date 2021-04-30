@@ -24,21 +24,19 @@ enum SecondaryCriteria: Int {
  */
 
 final class SuffixesViewModel: ObservableObject {
-    
-    @Published var selectedPrimaryCriteria: PrimaryCriteria = .default {
-        didSet {
-            applyPrimaryCriteria(oldValue)
+    @Published var selectedPrimaryCriteria: PrimaryCriteria = .all {
+        willSet {
+            applyPrimaryCriteria(newValue)
         }
     }
     @Published var selectedSecondaryCriteria: SecondaryCriteria = .asc {
-        didSet {
-            applySecondaryCriteria(oldValue)
+        willSet {
+            applySecondaryCriteria(newValue)
         }
     }
     @Published var uniqueSuffixes: [String] = []
     @Published var suffixesWithOccurances: [String: Int] = [:]
     @Published var sortedSuffixes: [String] = []
-    
     
     init(text: String?) {
         guard let text = text else {
@@ -69,8 +67,10 @@ final class SuffixesViewModel: ObservableObject {
             sortedSuffixes = uniqueSuffixes
             return
         case .top10_3chars:
+            top10With(chars: 3)
             return
         case .top10_5chars:
+            top10With(chars: 5)
             return
         }
     }
@@ -79,23 +79,21 @@ final class SuffixesViewModel: ObservableObject {
         print("Criteria changed \(sortingCriteria)")
         switch sortingCriteria {
         case .asc:
-            sortedSuffixes.sort {
-                $0 > $1
-            }
+            sortedSuffixes.sort { $0 > $1 }
             return
         case .desc:
-            sortedSuffixes.sort {
-                $0 < $1
-            }
+            sortedSuffixes.sort { $0 < $1 }
             return
         }
     }
     
-    func top10With3Chars() {
-        let threeCharsWords = uniqueSuffixes.filter {$0.count == 3 }
-        var threeCharsWordsWithOccurances = suffixesWithOccurances.filter { threeCharsWords.contains($0.key) }
+    func top10With(chars number: Int) {
+        let threeCharsWords = uniqueSuffixes.filter {$0.count == number }
+        let threeCharsWordsWithOccurances = suffixesWithOccurances.filter { threeCharsWords.contains($0.key) }.sorted { $0.1 > $1.1 }
         
-//        threeCharsWordsWithOccurances = threeCharsWordsWithOccurances.sorted { $0.value > $1.value }
+        sortedSuffixes = threeCharsWordsWithOccurances[..<10].map { (key, value) in
+            return key
+        }
     }
 }
 

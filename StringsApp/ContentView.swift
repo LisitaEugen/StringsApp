@@ -21,13 +21,15 @@ struct ContentView: View {
                     Text("Top 5 chars").tag(PrimaryCriteria.top10_5chars)
                    })
                 .pickerStyle(SegmentedPickerStyle())
-            Picker(selection: $viewModel.selectedSecondaryCriteria, label:
-                    Text("Additional sorting")
-                   , content: {
-                    Text("Asc").tag(SecondaryCriteria.asc)
-                    Text("Desc").tag(SecondaryCriteria.desc)
-                   })
-                .pickerStyle(SegmentedPickerStyle())
+            if viewModel.selectedPrimaryCriteria == .all {
+                Picker(selection: $viewModel.selectedSecondaryCriteria, label:
+                        Text("Additional sorting")
+                       , content: {
+                        Text("Asc").tag(SecondaryCriteria.asc)
+                        Text("Desc").tag(SecondaryCriteria.desc)
+                       })
+                    .pickerStyle(SegmentedPickerStyle())
+            }
             
             ScrollView {
                 LazyVStack(alignment: .leading) {
