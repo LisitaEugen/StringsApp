@@ -8,13 +8,14 @@
 import Foundation
 import Combine
 
-enum SortingCriteria: Int {
+enum PrimaryCriteria: Int {
     case `default`, top10_3chars, top10_5chars
-    
-    static func all() -> [SortingCriteria] {
-       return [`default`, top10_3chars, top10_5chars]
-    }
 }
+
+enum SecondaryCriteria: Int {
+    case asc, desc
+}
+
 
 /*
  2.1.1 листом всех суффиксов, повторяющиеся помечать кол-вом, остортировать по алфавиту, сделать переключение сортировки ASC/DESC
@@ -25,11 +26,16 @@ enum SortingCriteria: Int {
 final class SuffixesViewModel: ObservableObject {
     
     @Published var suffixes: [String] = []
-    @Published var sortingCriterias: [SortingCriteria] = SortingCriteria.all()
-    @Published var sortedSuffixes: [String: Int?] = [:]
-    @Published var selectedCriteria: SortingCriteria = .default {
+    @Published var sortedSuffixesWithOccurances: [String: Int] = [:]
+    @Published var sortedSuffixes: [String] = []
+    @Published var selectedPrimaryCriteria: PrimaryCriteria = .default {
         didSet {
-            applySortingCriteria(oldValue)
+            applyPrimaryCriteria(oldValue)
+        }
+    }
+    @Published var selectedSecondaryCriteria: SecondaryCriteria = .asc {
+        didSet {
+            applySecondaryCriteria(oldValue)
         }
     }
     
@@ -46,9 +52,11 @@ final class SuffixesViewModel: ObservableObject {
                 suffixes.append(suffix)
             }
         }
+        
+        groupSufixes()
     }
     
-    private func applySortingCriteria(_ sortingCriteria: SortingCriteria) {
+    private func applyPrimaryCriteria(_ sortingCriteria: PrimaryCriteria) {
         print("Criteria changed \(sortingCriteria)")
         switch sortingCriteria {
         case .default:
@@ -58,5 +66,38 @@ final class SuffixesViewModel: ObservableObject {
         case .top10_5chars:
             return
         }
+    }
+    
+    private func applySecondaryCriteria(_ sortingCriteria: SecondaryCriteria) {
+        print("Criteria changed \(sortingCriteria)")
+        switch sortingCriteria {
+        case .asc:
+            sortedSuffixes.sort {
+                $0 > $1
+            }
+            return
+        case .desc:
+            sortedSuffixes.sort {
+                $0 < $1
+            }
+            return
+        }
+    }
+    
+    private func groupSufixes() {
+        let uniqueSuffixes = suffixes.uniqued().sorted()
+        
+        for sufix in uniqueSuffixes {
+            sortedSuffixesWithOccurances[sufix] = suffixes.filter { $0 == sufix }.count
+        }
+        
+        sortedSuffixes = uniqueSuffixes
+    }
+}
+
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }

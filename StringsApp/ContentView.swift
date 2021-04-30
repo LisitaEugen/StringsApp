@@ -13,21 +13,38 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Picker(selection: $viewModel.selectedCriteria, label:
-                    Text("Picker Name")
+            Picker(selection: $viewModel.selectedPrimaryCriteria, label:
+                    Text("Primary sorting")
                    , content: {
-                    Text("Value 1").tag(SortingCriteria.default)
-                    Text("Value 2").tag(SortingCriteria.top10_3chars)
-                    Text("Value 3").tag(SortingCriteria.top10_5chars)
+                    Text("Sorted").tag(PrimaryCriteria.default)
+                    Text("Top 3 chars").tag(PrimaryCriteria.top10_3chars)
+                    Text("Top 5 chars").tag(PrimaryCriteria.top10_5chars)
                    })
                 .pickerStyle(SegmentedPickerStyle())
+            if viewModel.selectedPrimaryCriteria == .default {
+                Picker(selection: $viewModel.selectedSecondaryCriteria, label:
+                        Text("Additional sorting")
+                       , content: {
+                        Text("Asc").tag(SecondaryCriteria.asc)
+                        Text("Desc").tag(SecondaryCriteria.desc)
+                       })
+                    .pickerStyle(SegmentedPickerStyle())
+            }
             ScrollView {
-                ForEach(viewModel.suffixes, id: \.self) { suffix in
-                    Text(suffix)
-                        .frame(width: 300, height: 20, alignment: .leading)
+                LazyVStack(alignment: .leading) {
+                    ForEach(viewModel.sortedSuffixes, id: \.self) { suffix in
+                        HStack {
+                            Text(suffix)
+                            Spacer()
+                            if let occurance = viewModel.sortedSuffixesWithOccurances[suffix], occurance > 1 {
+                                Text("\(occurance)")
+                            }
+                            
+                        }
+                        .padding(10)
+                    }
                 }
             }
-            .frame(width: .infinity)
             Spacer()
         }
     }
