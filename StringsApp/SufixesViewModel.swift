@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum PrimaryCriteria: Int {
-    case `default`, top10_3chars, top10_5chars
+    case all, top10_3chars, top10_5chars
 }
 
 enum SecondaryCriteria: Int {
@@ -25,9 +25,6 @@ enum SecondaryCriteria: Int {
 
 final class SuffixesViewModel: ObservableObject {
     
-    @Published var suffixes: [String] = []
-    @Published var sortedSuffixesWithOccurances: [String: Int] = [:]
-    @Published var sortedSuffixes: [String] = []
     @Published var selectedPrimaryCriteria: PrimaryCriteria = .default {
         didSet {
             applyPrimaryCriteria(oldValue)
@@ -38,6 +35,10 @@ final class SuffixesViewModel: ObservableObject {
             applySecondaryCriteria(oldValue)
         }
     }
+    @Published var uniqueSuffixes: [String] = []
+    @Published var suffixesWithOccurances: [String: Int] = [:]
+    @Published var sortedSuffixes: [String] = []
+    
     
     init(text: String?) {
         guard let text = text else {
@@ -45,21 +46,27 @@ final class SuffixesViewModel: ObservableObject {
         }
         
         let words = text.split(whereSeparator: {$0 == " "})
+        var suffixes: [String] = []
         
         for word in words {
             let sArray = SuffixArray(word: String(word))
-            sArray.forEach { suffix in
-                suffixes.append(suffix)
-            }
+            suffixes.append(contentsOf: sArray)
         }
         
-        groupSufixes()
+        uniqueSuffixes = suffixes.uniqued().sorted()
+        
+        for sufix in uniqueSuffixes {
+            suffixesWithOccurances[sufix] = suffixes.filter { $0 == sufix }.count
+        }
+        
+        sortedSuffixes = uniqueSuffixes
     }
     
     private func applyPrimaryCriteria(_ sortingCriteria: PrimaryCriteria) {
         print("Criteria changed \(sortingCriteria)")
         switch sortingCriteria {
-        case .default:
+        case .all:
+            sortedSuffixes = uniqueSuffixes
             return
         case .top10_3chars:
             return
@@ -84,14 +91,11 @@ final class SuffixesViewModel: ObservableObject {
         }
     }
     
-    private func groupSufixes() {
-        let uniqueSuffixes = suffixes.uniqued().sorted()
+    func top10With3Chars() {
+        let threeCharsWords = uniqueSuffixes.filter {$0.count == 3 }
+        var threeCharsWordsWithOccurances = suffixesWithOccurances.filter { threeCharsWords.contains($0.key) }
         
-        for sufix in uniqueSuffixes {
-            sortedSuffixesWithOccurances[sufix] = suffixes.filter { $0 == sufix }.count
-        }
-        
-        sortedSuffixes = uniqueSuffixes
+//        threeCharsWordsWithOccurances = threeCharsWordsWithOccurances.sorted { $0.value > $1.value }
     }
 }
 

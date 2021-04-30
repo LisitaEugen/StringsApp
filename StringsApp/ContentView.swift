@@ -16,27 +16,26 @@ struct ContentView: View {
             Picker(selection: $viewModel.selectedPrimaryCriteria, label:
                     Text("Primary sorting")
                    , content: {
-                    Text("Sorted").tag(PrimaryCriteria.default)
+                    Text("All").tag(PrimaryCriteria.all)
                     Text("Top 3 chars").tag(PrimaryCriteria.top10_3chars)
                     Text("Top 5 chars").tag(PrimaryCriteria.top10_5chars)
                    })
                 .pickerStyle(SegmentedPickerStyle())
-            if viewModel.selectedPrimaryCriteria == .default {
-                Picker(selection: $viewModel.selectedSecondaryCriteria, label:
-                        Text("Additional sorting")
-                       , content: {
-                        Text("Asc").tag(SecondaryCriteria.asc)
-                        Text("Desc").tag(SecondaryCriteria.desc)
-                       })
-                    .pickerStyle(SegmentedPickerStyle())
-            }
+            Picker(selection: $viewModel.selectedSecondaryCriteria, label:
+                    Text("Additional sorting")
+                   , content: {
+                    Text("Asc").tag(SecondaryCriteria.asc)
+                    Text("Desc").tag(SecondaryCriteria.desc)
+                   })
+                .pickerStyle(SegmentedPickerStyle())
+            
             ScrollView {
                 LazyVStack(alignment: .leading) {
                     ForEach(viewModel.sortedSuffixes, id: \.self) { suffix in
                         HStack {
                             Text(suffix)
                             Spacer()
-                            if let occurance = viewModel.sortedSuffixesWithOccurances[suffix], occurance > 1 {
+                            if let occurance = viewModel.suffixesWithOccurances[suffix], occurance > 1 {
                                 Text("\(occurance)")
                             }
                             
