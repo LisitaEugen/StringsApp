@@ -8,21 +8,25 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @State var history: [String] = UserDefaults(suiteName: "group.com.fox.StringsApp")?.stringArray(forKey: "sharing_history") ?? [String]()
-    
+    @EnvironmentObject var viewModel: HistoryViewModel
+            
     var body: some View {
         VStack {
-            Button("Start test") {}
-                .padding()
+            Button("Start test") {
+                viewModel.startTest()
+            }
+            .padding()
             ScrollView {
                 LazyVStack(alignment: .leading) {
-                    ForEach(history, id: \.self) { text in
+                    ForEach(0..<viewModel.history.count) { index in
                         HStack {
-                            Text(text)
+                            Text("\(viewModel.history[index])")
                                 .truncationMode(.tail)
                                 .lineLimit(2)
                             Spacer()
-                            Text("12 sec")
+                            if viewModel.executionTime[index] != nil {
+                                Text("\(viewModel.executionTime[index] ?? 0.0) sec")
+                            }
                         }
                         .padding()
                     }
