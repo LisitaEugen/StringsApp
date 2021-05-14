@@ -33,7 +33,14 @@ class ShareViewController: SLComposeServiceViewController {
                     let sharedDefault = UserDefaults(suiteName: "group.com.fox.StringsApp")!
                     sharedDefault.set(text, forKey: "shared_text")
                     
-                    print(UserDefaults.standard.string(forKey: "shared_text") ?? "")
+                    //save history
+                    
+                    var history = sharedDefault.stringArray(forKey: "sharing_history") ?? [String]()
+                    history.append(text)
+                    
+                    sharedDefault.set(history, forKey: "sharing_history")
+                    
+                    print(history)
                 })
             }
         }

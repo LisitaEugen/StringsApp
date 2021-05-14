@@ -88,10 +88,14 @@ final class SuffixesViewModel: ObservableObject {
     }
     
     func top10With(chars number: Int) {
-        let threeCharsWords = uniqueSuffixes.filter {$0.count == number }
-        let threeCharsWordsWithOccurances = suffixesWithOccurances.filter { threeCharsWords.contains($0.key) }.sorted { $0.1 > $1.1 }
+        guard uniqueSuffixes.count > 0 else {
+            return
+        }
         
-        sortedSuffixes = threeCharsWordsWithOccurances[..<10].map { (key, value) in
+        let nCharsWords = uniqueSuffixes.filter {$0.count == number }
+        let nCharsWordsWithOccurances = suffixesWithOccurances.filter { nCharsWords.contains($0.key) }.sorted { $0.1 > $1.1 }
+        
+        sortedSuffixes = nCharsWordsWithOccurances[..<10].map { (key, value) in
             return key
         }
     }

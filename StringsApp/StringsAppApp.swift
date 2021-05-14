@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct StringsAppApp: App {
     @Environment(\.scenePhase) var scenePhase
-    @AppStorage("shared_text", store: UserDefaults(suiteName: "group.com.fox.StringsApp")) var sharedText: String = ""
+    @AppStorage("shared_text", store: UserDefaults(suiteName: "group.com.fox.StringsApp")) var sharedText: String = "" 
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .environmentObject(SuffixesViewModel(text: sharedText))
         }.onChange(of: scenePhase ) { newScenePhase in
             switch (newScenePhase) {

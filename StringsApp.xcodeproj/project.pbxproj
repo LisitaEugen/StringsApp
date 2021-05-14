@@ -18,6 +18,8 @@
 		DE443DAA25D0933C001B4318 /* SharingIsCaring.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DE443DA025D0933C001B4318 /* SharingIsCaring.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EAB876CE2618933100C85159 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE443DA425D0933C001B4318 /* MainInterface.storyboard */; };
 		EAB876D426189B2200C85159 /* SuffixSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB876D326189B2200C85159 /* SuffixSequence.swift */; };
+		EACD4447264DFAB800FBBEFD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD4446264DFAB800FBBEFD /* MainView.swift */; };
+		EACD4449264DFB5600FBBEFD /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD4448264DFB5600FBBEFD /* HistoryView.swift */; };
 		EAEDC9B5263B40A800A14FEF /* SufixesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEDC9B4263B40A800A14FEF /* SufixesViewModel.swift */; };
 		EAEDC9BB263B412900A14FEF /* SuffixArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEDC9BA263B412900A14FEF /* SuffixArray.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,8 @@
 		DE443DB325D093E6001B4318 /* StringsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StringsApp.entitlements; sourceTree = "<group>"; };
 		DE443DB825D0945F001B4318 /* SharingIsCaring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SharingIsCaring.entitlements; sourceTree = "<group>"; };
 		EAB876D326189B2200C85159 /* SuffixSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuffixSequence.swift; sourceTree = "<group>"; };
+		EACD4446264DFAB800FBBEFD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		EACD4448264DFB5600FBBEFD /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		EAEDC9B4263B40A800A14FEF /* SufixesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SufixesViewModel.swift; sourceTree = "<group>"; };
 		EAEDC9BA263B412900A14FEF /* SuffixArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuffixArray.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +154,8 @@
 				DE443D7725D08F2D001B4318 /* Info.plist */,
 				DE443D7425D08F2D001B4318 /* Preview Content */,
 				EAEDC9BA263B412900A14FEF /* SuffixArray.swift */,
+				EACD4446264DFAB800FBBEFD /* MainView.swift */,
+				EACD4448264DFB5600FBBEFD /* HistoryView.swift */,
 			);
 			path = StringsApp;
 			sourceTree = "<group>";
@@ -352,6 +358,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EACD4449264DFB5600FBBEFD /* HistoryView.swift in Sources */,
+				EACD4447264DFAB800FBBEFD /* MainView.swift in Sources */,
 				EAEDC9B5263B40A800A14FEF /* SufixesViewModel.swift in Sources */,
 				DE443D7125D08F2B001B4318 /* ContentView.swift in Sources */,
 				EAEDC9BB263B412900A14FEF /* SuffixArray.swift in Sources */,
